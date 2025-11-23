@@ -3,7 +3,7 @@ from .models import Album , MusicSet
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name' , 'available']
     prepopulated_fields = {'slug': ('name',)}
 
 @admin.register(MusicSet)

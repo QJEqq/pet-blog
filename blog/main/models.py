@@ -10,6 +10,7 @@ class Album(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
     image = models.ImageField(upload_to='album_photo/')
+    available = models.BooleanField(default=True)
         
     
     def save(self, *args, **kwargs):
@@ -61,7 +62,7 @@ class MusicSet(models.Model):
 
                     self.duration = timedelta(seconds=duration_seconds)
 
-                    super().save(update_fields=['duration'])
+                    super().save(*args, **kwargs, update_fields=['duration'])
                     
         except Exception as e:
             print(f"Ошибка при вычислении длительности: {e}")
