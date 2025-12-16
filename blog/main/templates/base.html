@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  </head>
+  <body class="text-white flex flex-col min-h-screen" style="font-family: 'Orbitron', sans-serif !important;">
+    <header class="dark-header flex bg-black  items-center justify-between px-28 py-4 border-b border-neutral-800">
+        <div class="header-logo flex gap-3">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-glyph"><circle cx="50" cy="50" r="45" stroke="#FFFFFF" stroke-width="2" fill="none" class="logo-circle"></circle><line x1="20" y1="20" x2="80" y2="80" stroke="#FF0033" stroke-width="3" class="logo-line"></line><circle cx="20" cy="20" r="3" fill="#FF0033" class="logo-dot"></circle><circle cx="80" cy="80" r="3" fill="#FF0033" class="logo-dot"></circle></svg>
+            <span class="logo-text text-xl font-bold uppercase mt-2">selfissued</span>
+        </div>
+        <nav class="header-nav flex gap-8 uppercase text-neutral-600 text-sm">
+            <a>bio</a>
+            <a>music</a>
+            <a>tour</a>
+            <a>contact</a>
+        </nav>
+    </header>
+    <main>
+    {% block content %}
+    {% endblock %}
+    </main>
+    <footer class="mt-auto py-6 border-t border-neutral-800 relative">
+    <div class="relative z-10 flex flex-col items-center"
+    style="background-image: repeating-linear-gradient(0deg, transparent, transparent 1px, #0e0d0d 1px, transparent 50px), repeating-linear-gradient(-90deg, transparent, transparent 1px, #0c0909 1px, transparent 50px); width: 60%; left: 20%;">
+        <span class="footer-text text-xs  uppercase tracking-widest">
+            © 2025 SELFISSUED. ALL RIGHTS RESERVED.
+        </span>
+        <span class="footer-text text-xs text-neutral-500 uppercase tracking-widest">
+            DESIGNED BY TH
+        </span>
+    </div>
+    </footer>
+  </body>
+</html>

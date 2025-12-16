@@ -1,0 +1,18 @@
+html, body {
+            font-family: 'Orbitron', monospace !important;
+            font-weight: 900 !important;
+            background-color: #000000 !important;
+            color: white !important;
+        }
+        
+
+        .logo-text {
+            font-family: 'Orbitron', monospace !important;
+            font-weight: 900 !important;
+            letter-spacing: 0.05em; 
+        }
+
+        * {
+            font-family: inherit !important;
+        }
+
