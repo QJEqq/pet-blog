@@ -1,7 +1,34 @@
-
 {% extends "base.html" %}
 
 {% load static %}
 
 {% block content %}
+<section class="banner">
+    <div class="flex justify-center items-center  w-full min-h-[450px] md:min-h-[550px] lg:min-h-[750px] border-b border-neutral-800" >
+        <div class="page-load flex justify-center items-center uppercase flex-col mb-10 space-y-4 animate-fade-in">
+            <svg width="150" height="150" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-glyph"><circle cx="50" cy="50" r="45" stroke="#FFFFFF" stroke-width="2" fill="none" class="logo-circle"></circle><line x1="20" y1="20" x2="80" y2="80" stroke="#FF0033" stroke-width="3" class="logo-line"></line><circle cx="20" cy="20" r="3" fill="#FF0033" class="logo-dot"></circle><circle cx="80" cy="80" r="3" fill="#FF0033" class="logo-dot"></circle></svg>
+            <span class="text-[46px] font-extrabold [text-shadow:0_0_6px_#ff0000,0_0_3px_#ff0000]">selfissued</span>
+            <span class="under-main font-extralight text-neutral-500 ">ARCHITECT OF DIGITAL SOUND</span>
+            <div class="mt-5">
+                <button onclick="window.location.href='#'" class="cursor-pointer uppercase text-black text-sm font-extralight bg-red-500 p-4 shadow-lg transition-all duration-500 ease-out hover:bg-red-400 hover:shadow-2xl hover:shadow-red-600/70 hover:-translate-y-1">listen now</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bio-section flex bg-[#060505] justify-center min-h-[450px] md:min-h-[550px] lg:min-h-[700px]">
+    <div class="container w-2/3 flex flex-col gap-4">
+        <div class="bio-header flex mt-16 justify-start flex-col">
+            <span class="uppercase text-[46px]">bio</span>
+            <span class="h-1 w-32 bg-red-700 mt-5"></span>
+        </div>
+        <div class="bio-content flex justify-between">
+            <div class="bio-text flex items-center w-1/2">
+                <span class="text-lg md:text-xl lg:text-2xl">Electronic music producer crafting sonic landscapes at the intersection of minimalism and chaos. Influenced by cyberpunk aesthetics and futuristic soundscapes.</span>
+            </div>
+            <div class="bio-photo  flex justify-end">
+                <img class="max-w-full h-auto object-cover" src="{% static 'img/bio.jpg'%}" alt="Bio Photo">
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock  %}
