@@ -63,6 +63,17 @@ class MusicSet(models.Model):
                     self.duration = timedelta(seconds=duration_seconds)
 
                     super().save(*args, **kwargs, update_fields=['duration'])
+    
                     
         except Exception as e:
             print(f"Ошибка при вычислении длительности: {e}")
+
+    def get_duration_display(self):
+        """Возвращает отформатированную длительность в формате MM:SS"""
+        if not self.duration:
+            return "--:--"
+        
+        total_seconds = int(self.duration.total_seconds())
+        minutes = total_seconds // 60
+        seconds = total_seconds % 60
+        return f"{minutes:02d}:{seconds:02d}"

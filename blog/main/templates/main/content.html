@@ -10,25 +10,120 @@
             <span class="text-[46px] font-extrabold [text-shadow:0_0_6px_#ff0000,0_0_3px_#ff0000]">selfissued</span>
             <span class="under-main font-extralight text-neutral-500 ">ARCHITECT OF DIGITAL SOUND</span>
             <div class="mt-5">
-                <button onclick="window.location.href='#'" class="cursor-pointer uppercase text-black text-sm font-extralight bg-red-500 p-4 shadow-lg transition-all duration-500 ease-out hover:bg-red-400 hover:shadow-2xl hover:shadow-red-600/70 hover:-translate-y-1">listen now</button>
+                <button onclick="window.location.href='#'" class="cursor-pointer uppercase text-black text-sm font-extralight bg-red-500 p-4 shadow-lg rounded-md transition-all duration-500 ease-out hover:bg-red-400 hover:shadow-2xl hover:shadow-red-600/70 hover:-translate-y-1">listen now</button>
             </div>
         </div>
     </div>
 </section>
-<section class="bio-section flex bg-[#060505] justify-center min-h-[450px] md:min-h-[550px] lg:min-h-[700px]">
-    <div class="container w-2/3 flex flex-col gap-4">
-        <div class="bio-header flex mt-16 justify-start flex-col">
+<section class="bio-section flex bg-[#060505] justify-center min-h-[450px] md:min-h-[550px] lg:min-h-[700px] border-b border-neutral-800">
+    <div class="container w-2/3 flex flex-col mt-16 gap-4">
+        <div class="bio-header flex  justify-start flex-col">
             <span class="uppercase text-[46px]">bio</span>
             <span class="h-1 w-32 bg-red-700 mt-5"></span>
         </div>
         <div class="bio-content flex justify-between">
             <div class="bio-text flex items-center w-1/2">
-                <span class="text-lg md:text-xl lg:text-2xl">Electronic music producer crafting sonic landscapes at the intersection of minimalism and chaos. Influenced by cyberpunk aesthetics and futuristic soundscapes.</span>
+                <span class="text-lg md:text-xl lg:text-2xl text-wrap">Electronic music producer crafting sonic landscapes at the intersection of minimalism and chaos. Influenced by cyberpunk aesthetics and futuristic soundscapes.</span>
             </div>
-            <div class="bio-photo  flex justify-end">
-                <img class="max-w-full h-auto object-cover" src="{% static 'img/bio.jpg'%}" alt="Bio Photo">
+            <div class="bio-photo  flex justify-end ">
+                <img class="max-w-full h-auto object-cover rounded-md shadow-2xl" src="{% static 'img/bio.jpg'%}" alt="Bio Photo">
             </div>
         </div>
     </div>
 </section>
+<section class="audio flex justify-center min-h-[550px] md:min-h-[650px] lg:min-h-[800px]">
+    <div class="container w-2/3 flex-col justify-start mt-16 space-y-16">
+        <div class="music-header flex flex-col justify-start">
+            <span class="uppercase text-[46px]">music</span>
+            <span class="h-1 w-32 bg-red-700 mt-5"></span>
+        </div>
+        <div class="audio-player bg-[#060505] border border-neutral-800 w-full min-h-[250px] md:min-h-[350px] lg:min-h-[400px] p-6 md:p-8 lg:p-10 space-y-4">
+            <div class="flex audio-photo justify-start">
+                <div id='trackImageContainer' class="w-full max-w-xs mx-auto aspect-square rounded-md overflow-hidden border border-neutral-800 flex justify-center items-center">
+                    <div class="text-center p-8">
+                        <div class="text-4xl mb-4 text-neutral-700">♪</div>
+                        <div class="text-neutral-500 text-sm">Select a track</div>
+                    </div>
+                    <img id="currentTrackImage"
+                         src=''
+                         alt='Track cover'
+                         class="hidden w-full h-full object-cover "
+                        >
+                </div>
+            </div>
+            <div class="player-controls">
+                <div class="player-paet-trackname text-center p-4"></div>
+                <div class="flex items-center justify-center gap-4 flex-col">
+                    <div>
+                    <button id='prevBtn' class="p-3 text-neutral-400 hover:text-white">⏮</button>
+                    <button id='playBtn' class="px-4 py-3 bg-[rgba(5, 5, 5, 1)] transition-all duration-300 border border-neutral-800 text-white  hover:border-red-700">▶</button>
+                    <button id='nextBtn' class="p-3 text-neutral-400 hover:text-white">⏭</button>
+                    </div>
+                    <div class='flex flex-col justify-start'>
+                    <div class="w-full max-w-2xl space-y-2 mb-5">
+                            <div class="flex justify-between text-xs text-neutral-400">
+                                <span id="currentTime">0:00</span>
+                                <span id="totalTime">0:00</span>
+                            </div>
+                            <input type="range" 
+                                id="timebar" 
+                                min="0" 
+                                max="100" 
+                                value="0" 
+
+                            class="w-full h-1.5 bg-neutral-800 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-700">
+                        </div>
+                        
+                        <!-- Volumebar -->
+                        <div class="w-full max-w-md flex items-center gap-3">
+                            <span 
+                            class="text-neutral-400 text-sm cursor-pointer"
+                            id = 'muteBtn'
+                            >🔊
+                        </span>
+                            <input type="range" 
+                                id="volumebar" 
+                                min="0" 
+                                max="1" 
+                                step="0.01" 
+                                value="0.7" 
+                                class="w-full h-1.5 bg-neutral-800 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-red-700">
+                            <span id="volumeValue" class="text-neutral-400 text-xs w-10 text-right">70%</span>
+                        </div>
+                                    
+                    </div>
+                                
+            </div>
+            
+            <div class="music-list  max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
+                {% for track in tracks%}
+                    <div
+                        data-track-id="{{ track.id }}"
+                        data-track-name="{{ track.name }}"
+                        data-track-artist="{{ track.artist }}"
+                        data-track-duration="{{ track.get_duration_display }}"
+                        data-track-image="{{ track.image.url }}"
+                        data-audio-url="{{ track.audio_file.url }}"
+                        data-track-index="{{ forloop.counter0 }}"
+                        class="track-item w-full p-2 flex border border-transparent justify-between items-center py-3  transition-all duration-300 hover:bg-[rgba(239,68,68,0.1)]  hover:border-red-700">
+                        
+                        <div class="flex items-center gap-4">
+                            
+                            <span class="text-neutral-500 text-sm w-8">
+                                {{ forloop.counter|stringformat:"02d" }}  
+                            </span>
+                           
+                            <span class="uppercase text-base text-white">{{ track.name }}</span>
+                        </div>
+                        
+                        <span class="text-neutral-500 text-xs">
+                            {{ track.get_duration_display}}
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<audio id="audioPlayer" preload="metadata" style="display: none;"></audio>
 {% endblock  %}
