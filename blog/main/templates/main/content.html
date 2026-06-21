@@ -37,7 +37,7 @@
             <span class="uppercase text-[46px]">music</span>
             <span class="h-1 w-32 bg-red-700 mt-5"></span>
         </div>
-        <div class="audio-player bg-[#060505] border border-neutral-800 w-full min-h-[250px] md:min-h-[350px] lg:min-h-[400px] p-6 md:p-8 lg:p-10 space-y-4">
+        <div id='audio-play' class="audio-player mb-5 bg-[#060505] border border-neutral-800 w-full min-h-[250px] md:min-h-[350px] lg:min-h-[400px] p-6 md:p-8 lg:p-10 space-y-4">
             <div class="flex audio-photo justify-start">
                 <div id='trackImageContainer' class="w-full max-w-xs mx-auto aspect-square rounded-md overflow-hidden border border-neutral-800 flex justify-center items-center">
                     <div class="text-center p-8">
@@ -95,12 +95,13 @@
                                 
             </div>
             
-            <div class="music-list  max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
+            <div class="music-list mt-5  max-h-[200px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
                 {% for track in tracks%}
                     <div
                         data-track-id="{{ track.id }}"
                         data-track-name="{{ track.name }}"
                         data-track-artist="{{ track.artist }}"
+                        data-track-album="{{ track.album.name }}"
                         data-track-duration="{{ track.get_duration_display }}"
                         data-track-image="{{ track.image.url }}"
                         data-audio-url="{{ track.audio_file.url }}"
@@ -112,8 +113,8 @@
                             <span class="text-neutral-500 text-sm w-8">
                                 {{ forloop.counter|stringformat:"02d" }}  
                             </span>
-                           
                             <span class="uppercase text-base text-white">{{ track.name }}</span>
+                           
                         </div>
                         
                         <span class="text-neutral-500 text-xs">
@@ -126,4 +127,106 @@
     </div>
 </section>
 <audio id="audioPlayer" preload="metadata" style="display: none;"></audio>
+<section class="albums flex bg-[#060505] justify-center min-h-[450px] md:min-h-[550px] lg:min-h-[700px] border-b border-neutral-800">
+    <div class="container w-2/3 flex flex-col mt-16 gap-12">
+        
+        <div class="albums-header flex justify-start flex-col">
+            <span class="uppercase text-[46px] text-white font-bold tracking-wider">Albums</span>
+            <span class="h-1 w-32 bg-red-700 mt-5"></span>
+        </div>
+        
+        <div class="albums-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16">
+            {% for album in all_albums %}
+                {% if album.available %}
+                    <a href='?album={{ album.slug }}#audio-play' class="album-card group relative cursor-pointer border border-neutral-900 bg-[#0b0a0a] p-4 transition-all duration-500 hover:border-red-700 hover:shadow-xl hover:shadow-red-900/20">
+                        
+                        <div class="album-image w-full aspect-square overflow-hidden rounded-sm bg-neutral-900 mb-4 border border-neutral-800">
+                            {% if album.image %}
+                                <img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
+                                     src="{{ album.image.url }}" 
+                                     alt="{{ album.name }}">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center text-neutral-700 text-4xl">💿</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="album-info flex flex-col space-y-1">
+                            <span class="uppercase text-base font-medium text-white tracking-wide truncate group-hover:text-red-500 transition-colors duration-300">
+                                {{ album.name }}
+                            </span>
+                            <span class="text-xs text-neutral-500 uppercase font-extralight tracking-widest">
+                                LP / Album
+                            </span>
+                        </div>
+                        
+                        <div class="absolute top-0 right-0 w-0 h-0 border-t-[8px] border-r-[8px] border-transparent group-hover:border-r-red-700 group-hover:border-t-red-700 transition-all duration-300"></div>
+                    </a>
+                {% endif %}
+            {% empty %}
+                <div class="col-span-full text-center text-neutral-500 font-extralight py-12">
+                    No albums released yet. Stay tuned.
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+</section>
+<section class="contact flex bg-[#060505] justify-center min-h-[400px] md:min-h-[500px] border-t border-neutral-800">
+    <div class="container w-2/3 flex flex-col my-16 gap-12">
+        
+        <div class="contact-header flex justify-start flex-col">
+            <span class="uppercase text-[46px] text-white font-bold tracking-wider">CONTACT</span>
+            <span class="h-1 w-32 bg-red-700 mt-5"></span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            
+            <a href="https://t.me/selfissued" target="_blank" rel="noopener noreferrer" 
+               class="group flex flex-col justify-between p-6 border border-neutral-950 bg-[#0b0a0a] min-h-[160px] transition-all duration-500 hover:border-red-700 hover:shadow-lg hover:shadow-red-900/10">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-neutral-500 uppercase tracking-widest font-extralight">01 / Telegram</span>
+                    <span class="text-neutral-600 group-hover:text-red-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-sm">↗</span>
+                </div>
+                <div class="flex flex-col mt-6">
+                    <span class="text-xl md:text-2xl text-white font-medium tracking-wide group-hover:text-red-500 transition-colors duration-300">
+                        @selfissued
+                    </span>
+                    <span class="text-xs text-neutral-400 mt-1">Official Channel & Contact</span>
+                </div>
+            </a>
+
+            <a href="https://soundcloud.com/selfissued" target="_blank" rel="noopener noreferrer" 
+               class="group flex flex-col justify-between p-6 border border-neutral-950 bg-[#0b0a0a] min-h-[160px] transition-all duration-500 hover:border-red-700 hover:shadow-lg hover:shadow-red-900/10">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-neutral-500 uppercase tracking-widest font-extralight">02 / SoundCloud</span>
+                    <span class="text-neutral-600 group-hover:text-red-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-sm">↗</span>
+                </div>
+                <div class="flex flex-col mt-6">
+                    <span class="text-xl md:text-2xl text-white font-medium tracking-wide group-hover:text-red-500 transition-colors duration-300">
+                        selfissued
+                    </span>
+                    <span class="text-xs text-neutral-400 mt-1">Listen to latest tracks & demos</span>
+                </div>
+            </a>
+
+            <a href="mailto:example@gmail.com" 
+               class="group flex flex-col justify-between p-6 border border-neutral-950 bg-[#0b0a0a] min-h-[160px] transition-all duration-500 hover:border-red-700 hover:shadow-lg hover:shadow-red-900/10">
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-neutral-500 uppercase tracking-widest font-extralight">03 / Email</span>
+                    <span class="text-neutral-600 group-hover:text-red-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-sm">↗</span>
+                </div>
+                <div class="flex flex-col mt-6">
+                    <span class="text-xl md:text-2xl text-white font-medium tracking-wide group-hover:text-red-500 transition-colors duration-300 truncate">
+                        selfissued@gmail.com
+                    </span>
+                    <span class="text-xs text-neutral-400 mt-1">For booking & business inquiries</span>
+                </div>
+            </a>
+
+        </div>
+
+        
+        
+    </div>
+</section>
 {% endblock  %}

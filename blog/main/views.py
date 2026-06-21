@@ -5,10 +5,14 @@ from .models import Album , MusicSet
 from django.db.models import Count, Sum
 
 def HomePage(request):
+    album_slug = request.GET.get('album')
 
+    if album_slug:
+        all_musics = MusicSet.objects.filter(album__slug = album_slug)
+    else:
+        all_musics = MusicSet.objects.all()
     all_albums = Album.objects.filter(available__exact = True)
     count_album = all_albums.count()
-    all_musics = MusicSet.objects.select_related('album').all()
     popular_album = Album.objects.filter(available=True).annotate(
         track_count=Count('musicset')
     ).order_by('-track_count').first()

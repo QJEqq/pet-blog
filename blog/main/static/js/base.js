@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const trackName = this.dataset.trackName;
             const trackImageUrl = this.dataset.trackImage;
             const trackDuration = this.dataset.trackDuration;
+            const trackAlbum = this.dataset.trackAlbum;
 
             playBtn.textContent = '▶';
             currentTrackIndex = index;
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 50);
             }
             
-            updatePlayer(trackName, trackDuration, trackAudio);
+            updatePlayer(trackName, trackDuration, trackAudio, trackAlbum);
             saveCurrentTrack(trackName, trackImageUrl, trackAudio, index);
         });
     });
@@ -101,14 +102,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function updatePlayer(trackName, duration, trackAudio) {
+    function updatePlayer(trackName, duration, trackAudio, trackAlbum) {
         console.log(`Now playing: ${trackName} (${duration})`);
         
         const playerPart = document.querySelector('.player-paet-trackname');
         if (playerPart) {
+            const albumDisplay = (trackAlbum && trackAlbum !== "undefined") ? trackAlbum : '';
+
             playerPart.innerHTML = `
-                <div class="text-white font-bold text-lg mb-2">${trackName}</div>
-               
+                <div class="text-white font-bold text-lg mb-0.5 uppercase tracking-wide">${trackName}</div>
+                <div class="text-neutral-500 text-xs uppercase tracking-widest font-extralight">${albumDisplay}</div>
             `;
         }
 
